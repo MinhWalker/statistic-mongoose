@@ -1,0 +1,48 @@
+{
+  "name": "statistic-mongoose",
+  "version": "1.0.0",
+  "description": "Override Feathers service adapter for the Mongoose ORM",
+  "main": "lib/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "contributors": [
+    "Minh Nguyen <minhnh@makipos.com> (https://github.com/MinhWalker)"
+  ],
+  "bugs": {
+    "url": "https://github.com/feathersjs-ecosystem/feathers-mongoose/issues"
+  },
+  "engines": {
+    "node": ">= 6"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "peerDependencies": {
+    "mongoose": "^5.3.14"
+  },
+  "dependencies": {
+    "@feathersjs/commons": "^1.3.0",
+    "@feathersjs/errors": "^3.3.4",
+    "lodash.omit": "^4.5.0",
+    "uberproto": "^2.0.4"
+  },
+  "devDependencies": {
+    "@feathersjs/express": "^1.2.7",
+    "@feathersjs/feathers": "^3.2.3",
+    "@feathersjs/socketio": "^3.2.7",
+    "feathers-mongoose": "https://github.com/InnerPeace080/feathers-mongoose.git#6.3.1",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "feathers-service-tests": "^0.10.2",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.3.0",
+    "semistandard": "^13.0.1",
+    "sinon-chai": "^3.3.0",
+    "sinon": "^7.1.1"
+  }
+}
