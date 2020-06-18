@@ -2,11 +2,23 @@
   "name": "statistic-mongoose",
   "version": "1.0.0",
   "description": "Override Feathers service adapter for the Mongoose ORM",
+  "homepage": "https://github.com/MinhWalker/statistic-mongoose",
   "main": "lib/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "feathers",
+    "feathers-plugin",
+    "REST",
+    "Socket.io",
+    "realtime",
+    "mongodb",
+    "mongo",
+    "mongoose",
+    "service",
+    "statistic"
+  ],
   "author": "",
   "license": "MIT",
   "contributors": [
