@@ -233,6 +233,15 @@ app.service('statistic').find({
 `GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100`
 
 
+## License
+
+[MIT](LICENSE)
+
+## Authors
+
+- [Minhwalker](https://github.com/MinhWalker)
+
+
 
 
 
