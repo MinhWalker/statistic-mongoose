@@ -123,6 +123,118 @@ module.exports = function (app) {
 };
 ```
 
+## Querying, Validation
+
+You can see some basic Feathers querying [here](https://docs.feathersjs.com/api/databases/querying.html#equality). I added a few queries by override [feathers-mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose) module. 
+
+## $statistic 
+
+`$statistic` will return average value of the intervals
+
+```js
+//Get 100 average values following createdOn field
+app.service('statistic').find({
+  query: {
+    $statistic: 100
+  }
+})
+```
+
+`GET /statistic?$statistic=100`
+
+> **Important:** `$statistic` will not support paging 
+
+# Combine with other queries
+
+## $limit 
+
+`$limit` will Limited number of records 
+
+```js
+//Get 100 average values of 1000 records following createdOn field
+app.service('statistic').find({
+  query: {
+    $limit: 1000,
+    $statistic: 100
+  }
+})
+```
+
+`GET /statistic?$limit=1000&$statistic=100`
+
+## $skip 
+
+`$skip` will skip values sort by query field 
+
+```js
+//Get 100 average values of createdOn field, skip 10 first record
+app.service('statistic').find({
+  query: {
+    $skip: 10,
+    $statistic: 100
+  }
+})
+```
+
+`GET /statistic?$skip=1000&$statistic=100`
+
+## $lt, $lte
+
+Find all records where the value is less ($lt) or less and equal ($lte) to a given value for statistic analys.
+
+```js
+//Get 100 average values of values less then 10000
+app.service('statistic').find({
+  query: {
+    number: {
+      $lt: 10000
+    }
+    $statistic: 100
+  }
+})
+```
+
+`GET /statistic?number[$lt]=10000&$statistic=100`
+
+## $gt, $gte
+
+Find all records where the value is more ($gt) or more and equal ($gte) to a given value.
+
+```js
+//Get 100 average values of values more then 10000
+app.service('statistic').find({
+  query: {
+    number: {
+      $gt: 10000
+    }
+    $statistic: 100
+  }
+})
+```
+
+`GET /statistic?number[$gt]=10000&$statistic=100`
+
+## $in, $nin
+
+Find all records where the property does ($in) or does not ($nin) match any of the given values.
+
+```js
+//Find 100 average values in room 10 or 100000
+app.service('statistic').find({
+  query: {
+    number: {
+      $in: [ 10, 100000 ]
+    }
+    $statistic: 100
+  }
+})
+```
+
+`GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100`
+
+
+
+
 
 
 
