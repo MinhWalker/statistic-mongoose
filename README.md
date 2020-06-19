@@ -135,14 +135,21 @@ You can see some basic Feathers querying [here](https://docs.feathersjs.com/api/
 //Get 100 average values following createdOn field
 app.service('statistic').find({
   query: {
-    $statistic: 100
+    $statistic: 100,
+    averageBy: number,
+    sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?$statistic=100`
+`GET /statistic?$statistic=100&averageBy=number&sortBy=createdOn`
 
-> **Important:** `$statistic` will not support paging 
+__Options:__
+
+- `averageBy` (**required**) - The field you need to statistical
+- `sortBy` ((**required**)) - The field dependent values
+
+> **Important:** `$statistic` will not support paging . You need to add fields averageBy and sortBy to access $statistic query. 
 
 # Combine with other queries
 
@@ -155,12 +162,14 @@ app.service('statistic').find({
 app.service('statistic').find({
   query: {
     $limit: 1000,
-    $statistic: 100
+    $statistic: 100,
+    averageBy: number,
+    sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?$limit=1000&$statistic=100`
+`GET /statistic?$limit=1000&$statistic=100&averageBy=number&sortBy=createdOn`
 
 ## $skip 
 
@@ -171,12 +180,14 @@ app.service('statistic').find({
 app.service('statistic').find({
   query: {
     $skip: 10,
-    $statistic: 100
+    $statistic: 100,
+    averageBy: number,
+    sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?$skip=1000&$statistic=100`
+`GET /statistic?$skip=1000&$statistic=100&averageBy=number&sortBy=createdOn`
 
 ## $lt, $lte
 
@@ -189,12 +200,14 @@ app.service('statistic').find({
     number: {
       $lt: 10000
     }
-    $statistic: 100
+    $statistic: 100,
+    averageBy: number,
+    sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?number[$lt]=10000&$statistic=100`
+`GET /statistic?number[$lt]=10000&$statistic=100&averageBy=number&sortBy=createdOn`
 
 ## $gt, $gte
 
@@ -207,12 +220,14 @@ app.service('statistic').find({
     number: {
       $gt: 10000
     }
-    $statistic: 100
+    $statistic: 100,
+    averageBy: number,
+    sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?number[$gt]=10000&$statistic=100`
+`GET /statistic?number[$gt]=10000&$statistic=100&averageBy=number&sortBy=createdOn`
 
 ## $in, $nin
 
@@ -225,12 +240,14 @@ app.service('statistic').find({
     number: {
       $in: [ 10, 100000 ]
     }
-    $statistic: 100
+    $statistic: 100,
+    averageBy: number,
+    sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100`
+`GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100&averageBy=number&sortBy=createdOn`
 
 
 ## License
