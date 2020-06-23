@@ -1,6 +1,6 @@
 {
   "name": "statistic-mongoose",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Override Feathers service adapter for the Mongoose ORM",
   "homepage": "https://github.com/MinhWalker/statistic-mongoose",
   "main": "lib/",
