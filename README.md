@@ -136,20 +136,20 @@ You can see some basic Feathers querying [here](https://docs.feathersjs.com/api/
 app.service('statistic').find({
   query: {
     $statistic: 100,
-    averageBy: number,
-    sortBy: createdOn
+    S_averageBy: number,
+    S_sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?$statistic=100&averageBy=number&sortBy=createdOn`
+`GET /statistic?$statistic=100&S_averageBy=number&S_sortBy=createdOn`
 
 __Options:__
 
-- `averageBy` (**required**) - The field you need to statistical
-- `sortBy` ((**required**)) - The field dependent values
+- `S_averageBy` (**required**) - The field you need to statistical
+- `S_sortBy` ((**required**)) - The field dependent values
 
-> **Important:** `$statistic` will not support paging . You need to add fields averageBy and sortBy to access $statistic query. 
+> **Important:** `$statistic` will not support paging . You need to add fields S_averageBy and S_sortBy to access $statistic query. I use a general structure is S_ + field because if S_ is not present, it may be duplicated in database when performing record search. 
 
 # Combine with other queries
 
@@ -163,13 +163,13 @@ app.service('statistic').find({
   query: {
     $limit: 1000,
     $statistic: 100,
-    averageBy: number,
-    sortBy: createdOn
+    S_averageBy: number,
+    S_sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?$limit=1000&$statistic=100&averageBy=number&sortBy=createdOn`
+`GET /statistic?$limit=1000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
 
 ## $skip 
 
@@ -181,13 +181,13 @@ app.service('statistic').find({
   query: {
     $skip: 10,
     $statistic: 100,
-    averageBy: number,
-    sortBy: createdOn
+    S_averageBy: number,
+    S_sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?$skip=1000&$statistic=100&averageBy=number&sortBy=createdOn`
+`GET /statistic?$skip=1000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
 
 ## $lt, $lte
 
@@ -201,13 +201,13 @@ app.service('statistic').find({
       $lt: 10000
     }
     $statistic: 100,
-    averageBy: number,
-    sortBy: createdOn
+    S_averageBy: number,
+    S_sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?number[$lt]=10000&$statistic=100&averageBy=number&sortBy=createdOn`
+`GET /statistic?number[$lt]=10000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
 
 ## $gt, $gte
 
@@ -221,13 +221,13 @@ app.service('statistic').find({
       $gt: 10000
     }
     $statistic: 100,
-    averageBy: number,
-    sortBy: createdOn
+    S_averageBy: number,
+    S_sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?number[$gt]=10000&$statistic=100&averageBy=number&sortBy=createdOn`
+`GET /statistic?number[$gt]=10000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
 
 ## $in, $nin
 
@@ -241,13 +241,13 @@ app.service('statistic').find({
       $in: [ 10, 100000 ]
     }
     $statistic: 100,
-    averageBy: number,
-    sortBy: createdOn
+    S_averageBy: number,
+    S_sortBy: createdOn
   }
 })
 ```
 
-`GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100&averageBy=number&sortBy=createdOn`
+`GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
 
 
 ## License
