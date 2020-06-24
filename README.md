@@ -136,8 +136,8 @@ You can see some basic Feathers querying [here](https://docs.feathersjs.com/api/
 app.service('statistic').find({
   query: {
     $statistic: 100,
-    S_averageBy: number,
-    S_sortBy: createdOn
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn'
   }
 })
 ```
@@ -147,9 +147,41 @@ app.service('statistic').find({
 __Options:__
 
 - `S_averageBy` (**required**) - The field you need to statistical
-- `S_sortBy` ((**required**)) - The field dependent values
+- `S_sortBy` (**required**) - The field dependent values
 
 > **Important:** `$statistic` will not support paging . You need to add fields S_averageBy and S_sortBy to access $statistic query. I use a general structure is S_ + field because if S_ is not present, it may be duplicated in database when performing record search. 
+
+## $statistic with S_option (new feature)
+
+if you define `$statistic` with `S_option` will return average value group by year, month, day ...
+
+```js
+//Get average value of all days in time period 
+app.service('statistic').find({
+  query: {
+    $statistic: 0,
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn',
+    S_option: 'day',
+    createdOn: {
+      $lt: '2020-08-29T23:59:58.396Z',
+      $gte: '2020-08-01T23:59:58.396Z'
+    }
+  }
+})
+```
+
+`GET /statistic?$statistic=0&S_averageBy=number&S_sortBy=createdOn&S_option=day&createdOn[$gte]=2020-08-01T23:59:58.396Z&createdOn[$lt]=2020-08-29T23:59:58.396Z`
+
+__Options:__
+
+- `S_averageBy` (**required**) - The field you need to statistical
+- `S_sortBy` (**required**) - The field dependent values
+- `S_option`  (**required**) - All option: `year` , `month`, `dayOfMonth`,`hour`,`minute`, `second`,`millisecond` . 
+- `your_time_field_here[$gte]` (**required**)  - The field dependent values , in my example is createdOn .
+- `your_time_field_here[$lt]` (**required**)  - The field dependent values , in my example is createdOn .
+
+> **Important:** `$statistic` will not support paging . You need to add fields S_averageBy, S_sortBy, your_time_field_here[$gte], your_time_field_here[$lt] to access $statistic with S_option query. 
 
 # Combine with other queries
 
@@ -163,8 +195,8 @@ app.service('statistic').find({
   query: {
     $limit: 1000,
     $statistic: 100,
-    S_averageBy: number,
-    S_sortBy: createdOn
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn'
   }
 })
 ```
@@ -181,8 +213,8 @@ app.service('statistic').find({
   query: {
     $skip: 10,
     $statistic: 100,
-    S_averageBy: number,
-    S_sortBy: createdOn
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn'
   }
 })
 ```
@@ -201,8 +233,8 @@ app.service('statistic').find({
       $lt: 10000
     }
     $statistic: 100,
-    S_averageBy: number,
-    S_sortBy: createdOn
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn'
   }
 })
 ```
@@ -221,8 +253,8 @@ app.service('statistic').find({
       $gt: 10000
     }
     $statistic: 100,
-    S_averageBy: number,
-    S_sortBy: createdOn
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn'
   }
 })
 ```
@@ -241,8 +273,8 @@ app.service('statistic').find({
       $in: [ 10, 100000 ]
     }
     $statistic: 100,
-    S_averageBy: number,
-    S_sortBy: createdOn
+    S_averageBy: 'number',
+    S_sortBy: 'createdOn'
   }
 })
 ```
