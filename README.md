@@ -135,34 +135,38 @@ You can see some basic Feathers querying [here](https://docs.feathersjs.com/api/
 //Get 100 average values following createdOn field
 app.service('statistic').find({
   query: {
-    $statistic: 100,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn'
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' }
+    ]
   }
 })
 ```
 
-`GET /statistic?$statistic=100&S_averageBy=number&S_sortBy=createdOn`
+`GET /statistic?$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn`
 
 __Options:__
 
-- `S_averageBy` (**required**) - The field you need to statistical
-- `S_sortBy` (**required**) - The field dependent values
+- `$statistic[0][value]` (**required**) - The field dependent values
+- `$statistic[1][averageBy]` (**required**) - The field you need to statistical
 
-> **Important:** `$statistic` will not support paging . You need to add fields S_averageBy and S_sortBy to access $statistic query. I use a general structure is S_ + field because if S_ is not present, it may be duplicated in database when performing record search. 
+> **Important:** `$statistic` will not support paging . You need to add fields `$statistic[0][value]` and `$statistic[1][averageBy]` to access $statistic query.  
 
-## $statistic with S_option (new feature)
+## $statistic with option (new feature)
 
-if you define `$statistic` with `S_option` will return average value group by year, month, day ...
+if you define `$statistic` with `option` will return average value group by year, month, day ...
 
 ```js
 //Get average value of all days in time period 
 app.service('statistic').find({
   query: {
-    $statistic: 0,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn',
-    S_option: 'day',
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' },
+      { option: 'day' }
+    ],
     createdOn: {
       $lt: '2020-08-29T23:59:58.396Z',
       $gte: '2020-08-01T23:59:58.396Z'
@@ -171,17 +175,17 @@ app.service('statistic').find({
 })
 ```
 
-`GET /statistic?$statistic=0&S_averageBy=number&S_sortBy=createdOn&S_option=day&createdOn[$gte]=2020-08-01T23:59:58.396Z&createdOn[$lt]=2020-08-29T23:59:58.396Z`
+`GET /statistic?$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn&$statistic[3][option]=day&createdOn[$gte]=2020-08-01T23:59:58.396Z&createdOn[$lt]=2020-08-29T23:59:58.396Z`
 
 __Options:__
 
-- `S_averageBy` (**required**) - The field you need to statistical
-- `S_sortBy` (**required**) - The field dependent values
-- `S_option`  (**required**) - All option: `year` , `month`, `dayOfMonth`,`hour`,`minute`, `second`,`millisecond` . 
+- `$statistic[0][value]` (**required**) - The field dependent values
+- `$statistic[1][averageBy]` (**required**) - The field you need to statistical
+- `$statistic[3][option]`  (**required**) - All option: `year` , `month`, `dayOfMonth`,`hour`,`minute`, `second`,`millisecond` . 
 - `your_time_field_here[$gte]` (**required**)  - The field dependent values , in my example is createdOn .
 - `your_time_field_here[$lt]` (**required**)  - The field dependent values , in my example is createdOn .
 
-> **Important:** `$statistic` will not support paging . You need to add fields S_averageBy, S_sortBy, your_time_field_here[$gte], your_time_field_here[$lt] to access $statistic with S_option query. 
+> **Important:** `$statistic` will not support paging . You need to add fields `$statistic[0][value]`, `$statistic[1][averageBy]`, `$statistic[3][option]`, `your_time_field_here[$gte]`, `your_time_field_here[$lt]` to access `$statistic` with `option` query. 
 
 # Combine with other queries
 
@@ -194,14 +198,16 @@ __Options:__
 app.service('statistic').find({
   query: {
     $limit: 1000,
-    $statistic: 100,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn'
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' }
+    ]
   }
 })
 ```
 
-`GET /statistic?$limit=1000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
+`GET /statistic?$limit=1000&$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn`
 
 ## $skip 
 
@@ -212,14 +218,16 @@ app.service('statistic').find({
 app.service('statistic').find({
   query: {
     $skip: 10,
-    $statistic: 100,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn'
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' }
+    ]
   }
 })
 ```
 
-`GET /statistic?$skip=1000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
+`GET /statistic?$skip=1000&$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn`
 
 ## $lt, $lte
 
@@ -232,14 +240,16 @@ app.service('statistic').find({
     number: {
       $lt: 10000
     }
-    $statistic: 100,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn'
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' }
+    ]
   }
 })
 ```
 
-`GET /statistic?number[$lt]=10000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
+`GET /statistic?number[$lt]=10000&$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn`
 
 ## $gt, $gte
 
@@ -252,14 +262,16 @@ app.service('statistic').find({
     number: {
       $gt: 10000
     }
-    $statistic: 100,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn'
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' }
+    ]
   }
 })
 ```
 
-`GET /statistic?number[$gt]=10000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
+`GET /statistic?number[$gt]=10000&$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn`
 
 ## $in, $nin
 
@@ -272,14 +284,16 @@ app.service('statistic').find({
     number: {
       $in: [ 10, 100000 ]
     }
-    $statistic: 100,
-    S_averageBy: 'number',
-    S_sortBy: 'createdOn'
+    $statistic: [
+      { value: '100' },
+      { averageBy: 'number' },
+      { sortBy: 'createdOn' }
+    ]
   }
 })
 ```
 
-`GET /statistic?number[$in]=10&number[$in]=100000&$statistic=100&S_averageBy=number&S_sortBy=createdOn`
+`GET /statistic?number[$in]=10&number[$in]=100000&$statistic[0][value]=100&$statistic[1][averageBy]=number&$statistic[2][sortBy]=createdOn`
 
 
 ## License
