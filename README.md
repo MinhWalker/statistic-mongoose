@@ -239,7 +239,7 @@ app.service('statistic').find({
   query: {
     number: {
       $lt: 10000
-    }
+    },
     $statistic: [
       { value: '100' },
       { averageBy: 'number' },
@@ -261,7 +261,7 @@ app.service('statistic').find({
   query: {
     number: {
       $gt: 10000
-    }
+    },
     $statistic: [
       { value: '100' },
       { averageBy: 'number' },
@@ -283,7 +283,7 @@ app.service('statistic').find({
   query: {
     number: {
       $in: [ 10, 100000 ]
-    }
+    },
     $statistic: [
       { value: '100' },
       { averageBy: 'number' },
